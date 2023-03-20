@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
+import { SearchCountryProp } from "../../App";
 
-const Search = () => {
+const Search = (props: SearchCountryProp) => {
+  const { searchCountry } = props;
   const nationRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
-    console.log(nationRef.current?.value);
+    const nation = nationRef.current?.value as string;
+    searchCountry(nation);
   };
   return (
     <div>
