@@ -18,3 +18,7 @@ code {
   background-repeat: no-repeat;
   height: 100vh;
 }
+
+.card.search-card , .card.results-card {
+background-color: #b5b2e7
+}
