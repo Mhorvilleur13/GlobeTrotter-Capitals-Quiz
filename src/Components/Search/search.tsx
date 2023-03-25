@@ -13,7 +13,7 @@ const Search = (props: SearchCountryProp) => {
   };
   return (
     <div>
-      <Card>
+      <Card className="search-card">
         <Card.Body>
           <h2>Search a Nation</h2>
           <Form onSubmit={handleSubmit}>
