@@ -1,21 +1,32 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { Card } from "react-bootstrap";
-import { countryAtom as countryState } from "../../state/atom";
+import Table from "react-bootstrap/Table";
+import { randomCountriesAtom as randomCountriesState } from "../../state/atom";
 
 const Results = () => {
-  const [countryToSearch, setCountryToSeearch] = useRecoilState(countryState);
+  const [randomCountries, setRandomCountries] =
+    useRecoilState(randomCountriesState);
   return (
-    <Card className="mt-5 w-50 results-card">
-      <Card.Body>
-        <Card.Title>Results</Card.Title>
-        <Card.Text>
-          <h6>Capital:{countryToSearch.capital}</h6>
-        </Card.Text>
-        <Card.Text>
-          <h6>Continents:{countryToSearch.continents}</h6>
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <Table striped bordered hover variant="dark" className=" mt-5 w-50 ">
+      <thead>
+        <tr>
+          <th>Country</th>
+          <th>Capital</th>
+        </tr>
+      </thead>
+      <tbody>
+        {randomCountries.length >= 1 &&
+          randomCountries.map((country) => {
+            const capitalCity = country[Object.keys(country)[0]][0];
+            return (
+              <tr>
+                <td>{Object.keys(country)}</td>
+                <td>{capitalCity}</td>
+              </tr>
+            );
+          })}
+      </tbody>
+    </Table>
   );
 };
 
