@@ -1,28 +1,22 @@
 import React, { useRef, useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
-import { SearchCountryProp } from "../../App";
+import { ReturnRandomCountriesProp } from "../../App";
 
-const Search = (props: SearchCountryProp) => {
-  const { searchCountry } = props;
-  const nationRef = useRef<HTMLInputElement>(null);
+const Search = (props: ReturnRandomCountriesProp) => {
+  const { returnRandomCountries } = props;
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
-    const nation = nationRef.current?.value as string;
-    searchCountry(nation);
+    returnRandomCountries();
   };
   return (
     <div>
       <Card className="search-card">
         <Card.Body>
-          <h2>Search a Nation</h2>
+          <h2 className="text-center">Start Quiz!</h2>
           <Form onSubmit={handleSubmit}>
-            <Form.Group id="nation" className="text-center">
-              <Form.Label>Nation</Form.Label>
-              <Form.Control type="nation" ref={nationRef} />
-            </Form.Group>
             <Button className="w-100 mt-2" type="submit">
-              Search
+              GO
             </Button>
           </Form>
         </Card.Body>
