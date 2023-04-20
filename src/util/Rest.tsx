@@ -33,8 +33,19 @@ const Rest = {
       const randomCountriesFull = randomIndexes.map(
         (index) => countries[index]
       );
+      console.log(randomCountriesFull);
+      // const randomCountries = randomCountriesFull.map((country) => {
+      //   return {
+      //     [country.name.common]: country.capital,
+      //     latlng: country.latlng,
+      //   };
+      // });
       const randomCountries = randomCountriesFull.map((country) => {
-        return { [country.name.common]: country.capital };
+        return {
+          country: country.name.common,
+          capital: country.capital,
+          latlng: country.latlng,
+        };
       });
       console.log(randomCountries);
       return randomCountries;

@@ -2,6 +2,7 @@ import "./index.css";
 import { useEffect } from "react";
 import Search from "./Components/Search/search";
 import Results from "./Components/Results/results";
+import GlobeChart from "./Components/Globe/globe";
 import { Container } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import Rest from "./util/Rest";
@@ -27,7 +28,8 @@ function App() {
         style={{ minHeight: "100vh" }}
       >
         <Search returnRandomCountries={returnRandomCountries} />
-        <Results />
+        <GlobeChart />
+        {/* <Results /> */}
       </Container>
     </div>
   );

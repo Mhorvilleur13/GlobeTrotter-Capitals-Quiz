@@ -12,16 +12,18 @@ const Results = () => {
         <tr>
           <th>Country</th>
           <th>Capital</th>
+          <th>Coordinates</th>
         </tr>
       </thead>
       <tbody>
         {randomCountries.length >= 1 &&
           randomCountries.map((country) => {
-            const capitalCity = country[Object.keys(country)[0]][0];
+            //const capitalCity = country[Object.keys(country)[0]][0];
             return (
               <tr>
-                <td>{Object.keys(country)}</td>
-                <td>{capitalCity}</td>
+                <td>{country.country}</td>
+                <td>{country.capital}</td>
+                <td>{country.latlng[0]}</td>
               </tr>
             );
           })}

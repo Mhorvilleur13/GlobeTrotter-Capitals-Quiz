@@ -22,3 +22,10 @@ code {
 .card.search-card , .card.results-card {
 background-color: #b5b2e7
 }
+
+#chartdiv {
+  width: 100%;
+  height: 500px;
+max-width:100%;
+  background-color:#000033;
+}
