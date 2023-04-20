@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
-import { ReturnRandomCountriesProp } from "../../App";
+import { ReturnRandomCountriesProp, SkipCountryProp } from "../../App";
 
-const Search = (props: ReturnRandomCountriesProp) => {
-  const { returnRandomCountries } = props;
+const Search = (props: ReturnRandomCountriesProp & SkipCountryProp) => {
+  const { returnRandomCountries, skipCountry } = props;
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
@@ -19,6 +19,9 @@ const Search = (props: ReturnRandomCountriesProp) => {
               GO
             </Button>
           </Form>
+          <Button onClick={skipCountry} className="w-100 mt-2">
+            Skip Country
+          </Button>
         </Card.Body>
       </Card>
     </div>
