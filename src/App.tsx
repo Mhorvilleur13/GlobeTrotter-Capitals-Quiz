@@ -10,7 +10,6 @@ import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
 } from "./state/atom";
-import { Countries } from "../src/types/country";
 
 export interface ReturnRandomCountriesProp {
   returnRandomCountries: () => void;
