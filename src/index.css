@@ -29,3 +29,9 @@ background-color: #b5b2e7
 max-width:100%;
   background-color:#000033;
 }
+body .choice-button {
+  background-color: #0d469b;
+}
+.card-text {
+  font-size: 25px;
+}

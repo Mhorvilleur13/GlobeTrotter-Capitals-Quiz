@@ -6,6 +6,7 @@ import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
 } from "../../state/atom";
+import "../../index.css";
 
 const Search = (props: ReturnRandomCountriesProp & SkipCountryProp) => {
   const { returnRandomCountries, skipCountry } = props;
@@ -37,18 +38,19 @@ const Search = (props: ReturnRandomCountriesProp & SkipCountryProp) => {
         {quizStarted && (
           <Card.Body>
             <Card.Text className="mt-2 text-center">
-              <b>Country:</b>
-              {randomCountries[countryCounter]?.country}{" "}
+              {randomCountries[countryCounter]?.flag}
+              {randomCountries[countryCounter]?.country}
+              {randomCountries[countryCounter]?.flag}
             </Card.Text>
             <div className="d-flex ">
-              <Button className="mx-2">Capital1</Button>
-              <Button>Capital2</Button>
-              <Button className="mx-2">Capital3</Button>
-              <Button>Capital4</Button>
+              <Button className="mx-2 choice-button">Capital1</Button>
+              <Button className="choice-button">Capital2</Button>
+              <Button className="mx-2 choice-button">Capital3</Button>
+              <Button className="choice-button">Capital4</Button>
             </div>
             <div className="d-flex justify-content-center mt-2">
-              <Button onClick={skipCountry} variant="danger" size="sm">
-                Skip
+              <Button onClick={skipCountry} size="sm">
+                Next
               </Button>
             </div>
           </Card.Body>
