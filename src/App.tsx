@@ -1,5 +1,5 @@
 import "./index.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Search from "./Components/Search/search";
 import Results from "./Components/Results/results";
 import GlobeChart from "./Components/Globe/globe";
@@ -9,6 +9,8 @@ import Rest from "./util/Rest";
 import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
+  allCapitalsAtom as allCapitalsState,
+  randomIndexesAtom as randomIndexesState,
 } from "./state/atom";
 
 export interface ReturnRandomCountriesProp {
@@ -17,12 +19,23 @@ export interface ReturnRandomCountriesProp {
 export interface SkipCountryProp {
   skipCountry: () => void;
 }
+
+export interface generateRandomCapitalIndexProp {
+  generateRandomCapitalIndex: () => void;
+}
 function App() {
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
   const [countryCounter, setCountryCounter] =
     useRecoilState(countryCounterState);
+  const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
+  const [randomIndexes, setRandomIndexes] = useRecoilState(randomIndexesState);
 
+  useEffect(() => {
+    Rest.getRandomCapitals().then((capitals) => {
+      setAllCapitals(capitals);
+    });
+  }, []);
   const returnRandomCountries = () => {
     Rest.getRandomCountries().then((countries) =>
       setRandomCountries(countries)
@@ -31,8 +44,18 @@ function App() {
   };
   const skipCountry = () => {
     const newCountryCounter = countryCounter + 1;
-    console.log(newCountryCounter);
     setCountryCounter(newCountryCounter);
+  };
+  const generateRandomCapitalIndex = () => {
+    const newRandomIndexes: number[] = [];
+    while (newRandomIndexes.length < 3) {
+      let randomNumber = Math.floor(Math.random() * 240) + 1;
+      if (!newRandomIndexes.includes(randomNumber)) {
+        newRandomIndexes.push(randomNumber);
+      }
+    }
+    console.log(newRandomIndexes);
+    setRandomIndexes(newRandomIndexes);
   };
   return (
     <div className="page-container background-image">
@@ -43,6 +66,7 @@ function App() {
         <Search
           returnRandomCountries={returnRandomCountries}
           skipCountry={skipCountry}
+          generateRandomCapitalIndex={generateRandomCapitalIndex}
         />
         <GlobeChart />
         {/* <Results /> */}
