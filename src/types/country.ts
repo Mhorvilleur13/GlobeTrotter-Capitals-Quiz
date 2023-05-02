@@ -7,4 +7,6 @@ export interface Country {
   flag: string;
 }
 
-type Capital = string;
+export type Capital = string;
+
+export type RandomIndex = number;

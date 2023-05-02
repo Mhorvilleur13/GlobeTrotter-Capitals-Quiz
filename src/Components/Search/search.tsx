@@ -1,26 +1,40 @@
 import React, { useRef, useState } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
-import { ReturnRandomCountriesProp, SkipCountryProp } from "../../App";
+import {
+  ReturnRandomCountriesProp,
+  SkipCountryProp,
+  generateRandomCapitalIndexProp,
+} from "../../App";
 import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
+  allCapitalsAtom as allCapitalsState,
+  randomIndexesAtom as randomIndexesState,
 } from "../../state/atom";
 import "../../index.css";
 
-const Search = (props: ReturnRandomCountriesProp & SkipCountryProp) => {
-  const { returnRandomCountries, skipCountry } = props;
+const Search = (
+  props: ReturnRandomCountriesProp &
+    SkipCountryProp &
+    generateRandomCapitalIndexProp
+) => {
+  const { returnRandomCountries, skipCountry, generateRandomCapitalIndex } =
+    props;
   const quizRef = useRef(null);
   const [quizStarted, setQuizStarted] = useState(false);
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
   const [countryCounter, setCountryCounter] =
     useRecoilState(countryCounterState);
+  const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
+  const [randomIndexes, setRandomIndexes] = useRecoilState(randomIndexesState);
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
     returnRandomCountries();
     setQuizStarted(true);
+    generateRandomCapitalIndex();
   };
   return (
     <div>
@@ -42,14 +56,28 @@ const Search = (props: ReturnRandomCountriesProp & SkipCountryProp) => {
               {randomCountries[countryCounter]?.country}
               {randomCountries[countryCounter]?.flag}
             </Card.Text>
-            <div className="d-flex ">
-              <Button className="mx-2 choice-button">Capital1</Button>
-              <Button className="choice-button">Capital2</Button>
-              <Button className="mx-2 choice-button">Capital3</Button>
-              <Button className="choice-button">Capital4</Button>
+            <div className="d-flex">
+              <Button className="button-choice mx-2">
+                {allCapitals[randomIndexes[0]]}
+              </Button>
+              <Button className="button-choice">
+                {allCapitals[randomIndexes[1]]}
+              </Button>
+              <Button className="button-choice mx-2">
+                {randomCountries[countryCounter]?.capital}
+              </Button>
+              <Button className="button-choice">
+                {allCapitals[randomIndexes[2]]}
+              </Button>
             </div>
             <div className="d-flex justify-content-center mt-2">
-              <Button onClick={skipCountry} size="sm">
+              <Button
+                onClick={() => {
+                  skipCountry();
+                  generateRandomCapitalIndex();
+                }}
+                size="sm"
+              >
                 Next
               </Button>
             </div>

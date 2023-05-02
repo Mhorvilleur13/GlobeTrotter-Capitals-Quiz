@@ -32,7 +32,9 @@ const GlobeChart = () => {
 
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
-    polygonTemplate.fill = am4core.color("#FF6633");
+    //polygonTemplate.fill = am4core.color("#FF6633");
+    polygonTemplate.fill = am4core.color("#579c49");
+
     polygonTemplate.stroke = am4core.color("#000033");
     polygonTemplate.strokeWidth = 0.5;
     polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
