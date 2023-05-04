@@ -16,7 +16,7 @@ export const allCapitalsAtom = atom<Capital[][]>({
   default: [],
 });
 
-export const randomIndexesAtom = atom<RandomIndex[]>({
+export const randomCapitalIndexesAtom = atom<RandomIndex[]>({
   key: "random-indexes",
   default: [],
 });

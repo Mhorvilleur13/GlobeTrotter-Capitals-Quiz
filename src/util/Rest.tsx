@@ -2,22 +2,6 @@ import Axios from "axios";
 import { Country, Capital } from "../types/country";
 
 const Rest = {
-  // async getCountry(nation: string): Promise<Country> {
-  //   try {
-  //     const response = await Axios.get(
-  //       `https://restcountries.com/v3.1/name/${nation}`
-  //     );
-  //     const countryObject: Country = {
-  //       capital: response.data[0].capital,
-  //       continents: response.data[0].continents,
-  //     };
-  //     console.log(countryObject);
-  //     return countryObject;
-  //   } catch (error) {
-  //     console.error(error);
-  //     throw error;
-  //   }
-  // },
   async getRandomCapitals(): Promise<Capital[][]> {
     try {
       const response = await Axios.get("https://restcountries.com/v3.1/all");
@@ -41,24 +25,33 @@ const Rest = {
       const response = await Axios.get("https://restcountries.com/v3.1/all");
       const randomIndexes: number[] = [];
       const countries = response.data;
-      while (randomIndexes.length < 10) {
+      while (randomIndexes.length < 15) {
         const randomIndex = Math.floor(Math.random() * countries.length);
         if (!randomIndexes.includes(randomIndex)) {
           randomIndexes.push(randomIndex);
         }
       }
-      // const randomCountriesFull = randomIndexes.map(
-      //   (index) => countries[index]
-      // );
+      // this returns array of 10 countries with all data
+      // const randomCountriesFull = randomIndexes.map((index) => {
+      //   if (
+      //     countries[index].capital !== undefined &&
+      //     countries[index].capital.length === 1
+      //   ) {
+      //     return countries[index];
+      //   }
+      // });
+
       const randomCountriesFull = randomIndexes.map(
-        (index) => countries[index].capital !== undefined && countries[index]
+        (index) => countries[index]
       );
 
       console.log(randomCountriesFull);
+      // returns 10 countries with capital, lat, long, and flag.
       const randomCountries = randomCountriesFull.map((country) => {
+        const capital = country.capital ? country.capital : "No Capital";
         return {
           country: country.name.common,
-          capital: country.capital,
+          capital: capital,
           latlng: country.latlng,
           flag: country.flag,
         };

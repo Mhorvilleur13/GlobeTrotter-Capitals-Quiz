@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Card, Form, Button } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import {
@@ -10,7 +10,7 @@ import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
   allCapitalsAtom as allCapitalsState,
-  randomIndexesAtom as randomIndexesState,
+  randomCapitalIndexesAtom as randomCapitalIndexesState,
 } from "../../state/atom";
 import "../../index.css";
 
@@ -28,7 +28,10 @@ const Search = (
   const [countryCounter, setCountryCounter] =
     useRecoilState(countryCounterState);
   const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
-  const [randomIndexes, setRandomIndexes] = useRecoilState(randomIndexesState);
+  const [randomCapitalIndexes, setRandomCapitalIndexes] = useRecoilState(
+    randomCapitalIndexesState
+  );
+  const [shuffledButtons, setShuffledButtons] = useState<JSX.Element[]>([]);
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
@@ -36,6 +39,29 @@ const Search = (
     setQuizStarted(true);
     generateRandomCapitalIndex();
   };
+
+  const buttonElements = [
+    <Button className="button-choice mx-2">
+      {allCapitals[randomCapitalIndexes[0]]}
+    </Button>,
+    <Button className="button-choice mx-2">
+      {allCapitals[randomCapitalIndexes[1]]}
+    </Button>,
+    <Button className="button-choice mx-2">
+      {randomCountries[countryCounter]?.capital}
+    </Button>,
+    <Button className="button-choice mx-2">
+      {allCapitals[randomCapitalIndexes[2]]}
+    </Button>,
+  ];
+
+  useEffect(() => {
+    const newShuffledButtons = buttonElements.sort(
+      (a, b) => 0.5 - Math.random()
+    );
+    setShuffledButtons(newShuffledButtons);
+  }, [countryCounter, randomCountries]);
+
   return (
     <div>
       <Card className="search-card">
@@ -56,20 +82,7 @@ const Search = (
               {randomCountries[countryCounter]?.country}
               {randomCountries[countryCounter]?.flag}
             </Card.Text>
-            <div className="d-flex">
-              <Button className="button-choice mx-2">
-                {allCapitals[randomIndexes[0]]}
-              </Button>
-              <Button className="button-choice">
-                {allCapitals[randomIndexes[1]]}
-              </Button>
-              <Button className="button-choice mx-2">
-                {randomCountries[countryCounter]?.capital}
-              </Button>
-              <Button className="button-choice">
-                {allCapitals[randomIndexes[2]]}
-              </Button>
-            </div>
+            <div className="d-flex">{shuffledButtons}</div>
             <div className="d-flex justify-content-center mt-2">
               <Button
                 onClick={() => {
