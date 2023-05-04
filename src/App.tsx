@@ -10,7 +10,7 @@ import {
   randomCountriesAtom as randomCountriesState,
   countryCounterAtom as countryCounterState,
   allCapitalsAtom as allCapitalsState,
-  randomIndexesAtom as randomIndexesState,
+  randomCapitalIndexesAtom as randomCapitalIndexesState,
 } from "./state/atom";
 
 export interface ReturnRandomCountriesProp {
@@ -29,7 +29,9 @@ function App() {
   const [countryCounter, setCountryCounter] =
     useRecoilState(countryCounterState);
   const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
-  const [randomIndexes, setRandomIndexes] = useRecoilState(randomIndexesState);
+  const [randomCapitalIndexes, setRandomCapitalIndexes] = useRecoilState(
+    randomCapitalIndexesState
+  );
 
   useEffect(() => {
     Rest.getRandomCapitals().then((capitals) => {
@@ -55,7 +57,7 @@ function App() {
       }
     }
     console.log(newRandomIndexes);
-    setRandomIndexes(newRandomIndexes);
+    setRandomCapitalIndexes(newRandomIndexes);
   };
   return (
     <div className="page-container background-image">
