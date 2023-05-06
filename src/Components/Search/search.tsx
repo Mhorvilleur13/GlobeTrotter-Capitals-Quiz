@@ -4,34 +4,45 @@ import { useRecoilState } from "recoil";
 import {
   ReturnRandomCountriesProp,
   SkipCountryProp,
-  generateRandomCapitalIndexProp,
+  GenerateRandomCapitalIndexProp,
+  AddCorrectAnswerProp,
 } from "../../App";
 import {
   randomCountriesAtom as randomCountriesState,
-  countryCounterAtom as countryCounterState,
+  questionCounterAtom as questionCounterState,
   allCapitalsAtom as allCapitalsState,
   randomCapitalIndexesAtom as randomCapitalIndexesState,
+  correctAnswerCounterAtom as correctAnswerCounterState,
 } from "../../state/atom";
 import "../../index.css";
+import animation from "../Globe/globe";
 
 const Search = (
   props: ReturnRandomCountriesProp &
     SkipCountryProp &
-    generateRandomCapitalIndexProp
+    GenerateRandomCapitalIndexProp &
+    AddCorrectAnswerProp
 ) => {
-  const { returnRandomCountries, skipCountry, generateRandomCapitalIndex } =
-    props;
-  const quizRef = useRef(null);
+  const {
+    returnRandomCountries,
+    skipCountry,
+    generateRandomCapitalIndex,
+    addCorrectAnswer,
+  } = props;
+
   const [quizStarted, setQuizStarted] = useState(false);
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
-  const [countryCounter, setCountryCounter] =
-    useRecoilState(countryCounterState);
+  const [questionCounter, setQuestionCounter] =
+    useRecoilState(questionCounterState);
   const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
   const [randomCapitalIndexes, setRandomCapitalIndexes] = useRecoilState(
     randomCapitalIndexesState
   );
   const [shuffledButtons, setShuffledButtons] = useState<JSX.Element[]>([]);
+  const [correctAnswerCounter, setCorrectAnswerCounter] = useRecoilState(
+    correctAnswerCounterState
+  );
 
   const handleSubmit = (_e: any) => {
     _e.preventDefault();
@@ -41,16 +52,41 @@ const Search = (
   };
 
   const buttonElements = [
-    <Button className="button-choice mx-2">
+    <Button
+      className="button-choice mx-2"
+      onClick={() => {
+        skipCountry();
+        generateRandomCapitalIndex();
+      }}
+    >
       {allCapitals[randomCapitalIndexes[0]]}
     </Button>,
-    <Button className="button-choice mx-2">
+    <Button
+      className="button-choice mx-2"
+      onClick={() => {
+        skipCountry();
+        generateRandomCapitalIndex();
+      }}
+    >
       {allCapitals[randomCapitalIndexes[1]]}
     </Button>,
-    <Button className="button-choice mx-2">
-      {randomCountries[countryCounter]?.capital}
+    <Button
+      className="button-choice mx-2"
+      onClick={() => {
+        addCorrectAnswer();
+        skipCountry();
+        generateRandomCapitalIndex();
+      }}
+    >
+      {randomCountries[questionCounter]?.capital}
     </Button>,
-    <Button className="button-choice mx-2">
+    <Button
+      className="button-choice mx-2"
+      onClick={() => {
+        skipCountry();
+        generateRandomCapitalIndex();
+      }}
+    >
       {allCapitals[randomCapitalIndexes[2]]}
     </Button>,
   ];
@@ -60,7 +96,7 @@ const Search = (
       (a, b) => 0.5 - Math.random()
     );
     setShuffledButtons(newShuffledButtons);
-  }, [countryCounter, randomCountries]);
+  }, [questionCounter, randomCountries]);
 
   return (
     <div>
@@ -77,23 +113,18 @@ const Search = (
         )}
         {quizStarted && (
           <Card.Body>
-            <Card.Text className="mt-2 text-center">
-              {randomCountries[countryCounter]?.flag}
-              {randomCountries[countryCounter]?.country}
-              {randomCountries[countryCounter]?.flag}
+            <Card.Text className="text-center question-count">
+              {questionCounter + 1} out of 15
+            </Card.Text>
+            <Card.Text className="mt-2 text-center country">
+              {randomCountries[questionCounter]?.flag}
+              {randomCountries[questionCounter]?.country}
+              {randomCountries[questionCounter]?.flag}
             </Card.Text>
             <div className="d-flex">{shuffledButtons}</div>
-            <div className="d-flex justify-content-center mt-2">
-              <Button
-                onClick={() => {
-                  skipCountry();
-                  generateRandomCapitalIndex();
-                }}
-                size="sm"
-              >
-                Next
-              </Button>
-            </div>
+            <Card.Text className="text-center score mt-1">
+              Score:{correctAnswerCounter} / {randomCountries.length}
+            </Card.Text>
           </Card.Body>
         )}
       </Card>

@@ -32,6 +32,12 @@ max-width:100%;
 body .choice-button {
   background-color: #0d469b;
 }
-.card-text {
+.country {
   font-size: 25px;
+}
+.score {
+  font-size: 20px;
+}
+.question-count {
+  font-size: 19px;
 }

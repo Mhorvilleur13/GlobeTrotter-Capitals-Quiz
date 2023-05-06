@@ -8,9 +8,10 @@ import { useRecoilState } from "recoil";
 import Rest from "./util/Rest";
 import {
   randomCountriesAtom as randomCountriesState,
-  countryCounterAtom as countryCounterState,
+  questionCounterAtom as questionCounterState,
   allCapitalsAtom as allCapitalsState,
   randomCapitalIndexesAtom as randomCapitalIndexesState,
+  correctAnswerCounterAtom as correctAnswerCounterState,
 } from "./state/atom";
 
 export interface ReturnRandomCountriesProp {
@@ -20,17 +21,24 @@ export interface SkipCountryProp {
   skipCountry: () => void;
 }
 
-export interface generateRandomCapitalIndexProp {
+export interface GenerateRandomCapitalIndexProp {
   generateRandomCapitalIndex: () => void;
+}
+
+export interface AddCorrectAnswerProp {
+  addCorrectAnswer: () => void;
 }
 function App() {
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
-  const [countryCounter, setCountryCounter] =
-    useRecoilState(countryCounterState);
+  const [questionCounter, setQuestionCounter] =
+    useRecoilState(questionCounterState);
   const [allCapitals, setAllCapitals] = useRecoilState(allCapitalsState);
   const [randomCapitalIndexes, setRandomCapitalIndexes] = useRecoilState(
     randomCapitalIndexesState
+  );
+  const [correctAnswerCounter, setCorrectAnswerCounter] = useRecoilState(
+    correctAnswerCounterState
   );
 
   useEffect(() => {
@@ -42,11 +50,18 @@ function App() {
     Rest.getRandomCountries().then((countries) =>
       setRandomCountries(countries)
     );
-    setCountryCounter(0);
+    setQuestionCounter(0);
+    setCorrectAnswerCounter(0);
   };
   const skipCountry = () => {
-    const newCountryCounter = countryCounter + 1;
-    setCountryCounter(newCountryCounter);
+    const newCountryCounter = questionCounter + 1;
+    setQuestionCounter(newCountryCounter);
+  };
+
+  const addCorrectAnswer = () => {
+    const newCorrectAnswerCounter = correctAnswerCounter + 1;
+    setCorrectAnswerCounter(newCorrectAnswerCounter);
+    console.log("number of correct answers:" + correctAnswerCounter);
   };
   const generateRandomCapitalIndex = () => {
     const newRandomIndexes: number[] = [];
@@ -69,6 +84,7 @@ function App() {
           returnRandomCountries={returnRandomCountries}
           skipCountry={skipCountry}
           generateRandomCapitalIndex={generateRandomCapitalIndex}
+          addCorrectAnswer={addCorrectAnswer}
         />
         <GlobeChart />
         {/* <Results /> */}
