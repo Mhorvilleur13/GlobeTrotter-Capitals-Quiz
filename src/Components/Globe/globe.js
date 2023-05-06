@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -6,17 +6,18 @@ import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   randomCountriesAtom as randomCountriesState,
-  countryCounterAtom as countryCounterState,
+  questionCounterAtom as questionCounterState,
 } from "../../state/atom";
 
 am4core.useTheme(am4themes_animated);
 
 const GlobeChart = () => {
   const chartRef = useRef(null);
+  const [spinGlobe, setSpinGlobe] = useState(true);
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
-  const [countryCounter, setCountryCounter] =
-    useRecoilState(countryCounterState);
+  const [questionCounter, setQuestionCounter] =
+    useRecoilState(questionCounterState);
 
   useEffect(() => {
     let chart = am4core.create(chartRef.current, am4maps.MapChart);
@@ -53,25 +54,32 @@ const GlobeChart = () => {
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = chart.colors.getIndex(0).brighten(-0.5);
 
-    // let animation;
-    // setTimeout(function () {
-    //   animation = chart.animate(
-    //     { property: "deltaLongitude", to: 100000 },
-    //     20000000
-    //   );
-    // }, 3000);
+    let animation;
+    if (spinGlobe) {
+      setTimeout(function () {
+        animation = chart.animate(
+          { property: "deltaLongitude", to: 100000 },
+          20000000
+        );
+      }, 2000);
+    }
 
-    // chart.seriesContainer.events.on("down", function () {
+    // chart.seriesContainer.events.on("click", function () {
     //   animation.stop();
     // });
+    document.addEventListener("click", function () {
+      animation.stop();
+      setSpinGlobe(false);
+    });
 
     chart.goHome = function () {
       console.log(randomCountries[0].latlng[0]);
       console.log(randomCountries[0].latlng[1]);
-      console.log(chart);
-      chart.deltaLatitude = -1 * randomCountries[countryCounter].latlng[0];
-      chart.deltaLongitude = -1 * randomCountries[countryCounter].latlng[1];
+      chart.deltaLatitude = -1 * randomCountries[questionCounter].latlng[0];
+      chart.deltaLongitude = -1 * randomCountries[questionCounter].latlng[1];
       chart.zoomLevel = 1;
+      //chart.color = "#333";
+      console.log(chart);
     };
 
     return () => {
@@ -79,7 +87,7 @@ const GlobeChart = () => {
         chart.dispose();
       }
     };
-  }, [randomCountries, countryCounter]);
+  }, [randomCountries, questionCounter]);
 
   return <div ref={chartRef} style={{ width: "100%", height: "500px" }} />;
 };

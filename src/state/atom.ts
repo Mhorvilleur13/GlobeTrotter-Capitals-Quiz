@@ -6,7 +6,7 @@ export const randomCountriesAtom = atom<Country[]>({
   default: [],
 });
 
-export const countryCounterAtom = atom<number>({
+export const questionCounterAtom = atom<number>({
   key: "country-counter-atom",
   default: 0,
 });
@@ -19,4 +19,9 @@ export const allCapitalsAtom = atom<Capital[][]>({
 export const randomCapitalIndexesAtom = atom<RandomIndex[]>({
   key: "random-indexes",
   default: [],
+});
+
+export const correctAnswerCounterAtom = atom<number>({
+  key: "correct-answer-counter",
+  default: 0,
 });
