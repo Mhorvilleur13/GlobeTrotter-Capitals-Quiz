@@ -6,6 +6,7 @@ import {
   SkipCountryProp,
   GenerateRandomCapitalIndexProp,
   AddCorrectAnswerProp,
+  startOverProp,
 } from "../../App";
 import {
   randomCountriesAtom as randomCountriesState,
@@ -13,24 +14,26 @@ import {
   allCapitalsAtom as allCapitalsState,
   randomCapitalIndexesAtom as randomCapitalIndexesState,
   correctAnswerCounterAtom as correctAnswerCounterState,
+  quizStartedAtom as quizStartedState,
 } from "../../state/atom";
 import "../../index.css";
-import animation from "../Globe/globe";
 
 const Search = (
   props: ReturnRandomCountriesProp &
     SkipCountryProp &
     GenerateRandomCapitalIndexProp &
-    AddCorrectAnswerProp
+    AddCorrectAnswerProp &
+    startOverProp
 ) => {
   const {
     returnRandomCountries,
     skipCountry,
     generateRandomCapitalIndex,
     addCorrectAnswer,
+    startOver,
   } = props;
 
-  const [quizStarted, setQuizStarted] = useState(false);
+  const [quizStarted, setQuizStarted] = useRecoilState(quizStartedState);
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
   const [questionCounter, setQuestionCounter] =
@@ -100,7 +103,7 @@ const Search = (
 
   return (
     <div>
-      <Card className="search-card">
+      <Card className="search-card mt-3">
         {!quizStarted && (
           <Card.Body>
             <h2 className="text-center">Start Quiz!</h2>
@@ -111,7 +114,7 @@ const Search = (
             </Form>
           </Card.Body>
         )}
-        {quizStarted && (
+        {quizStarted && questionCounter < 15 && (
           <Card.Body>
             <Card.Text className="text-center question-count">
               {questionCounter + 1} out of 15
@@ -125,6 +128,15 @@ const Search = (
             <Card.Text className="text-center score mt-1">
               Score:{correctAnswerCounter} / {randomCountries.length}
             </Card.Text>
+          </Card.Body>
+        )}
+        {questionCounter >= 15 && (
+          <Card.Body>
+            <Card.Title>Results:</Card.Title>
+            <Card.Text className="text-center score">
+              {correctAnswerCounter} / 15
+            </Card.Text>
+            <Button onClick={startOver}>Play Again!</Button>
           </Card.Body>
         )}
       </Card>

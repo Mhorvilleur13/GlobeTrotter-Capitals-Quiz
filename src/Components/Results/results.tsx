@@ -7,12 +7,17 @@ const Results = () => {
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
   return (
-    <Table striped bordered hover variant="dark" className=" mt-5 w-50 ">
+    <Table
+      striped
+      bordered
+      hover
+      variant="dark"
+      className=" mt-2 w-50 results-table"
+    >
       <thead>
         <tr>
           <th>Country</th>
           <th>Capital</th>
-          <th>Coordinates</th>
         </tr>
       </thead>
       <tbody>
@@ -21,9 +26,11 @@ const Results = () => {
             //const capitalCity = country[Object.keys(country)[0]][0];
             return (
               <tr>
-                <td>{country.country}</td>
+                <td>
+                  {country.country}
+                  {country.flag}
+                </td>
                 <td>{country.capital}</td>
-                <td>{country.latlng[0]}</td>
               </tr>
             );
           })}

@@ -12,6 +12,7 @@ import {
   allCapitalsAtom as allCapitalsState,
   randomCapitalIndexesAtom as randomCapitalIndexesState,
   correctAnswerCounterAtom as correctAnswerCounterState,
+  quizStartedAtom as quizStartedState,
 } from "./state/atom";
 
 export interface ReturnRandomCountriesProp {
@@ -28,6 +29,9 @@ export interface GenerateRandomCapitalIndexProp {
 export interface AddCorrectAnswerProp {
   addCorrectAnswer: () => void;
 }
+export interface startOverProp {
+  startOver: () => void;
+}
 function App() {
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
@@ -41,11 +45,14 @@ function App() {
     correctAnswerCounterState
   );
 
+  const [quizStarted, setQuizStarted] = useRecoilState(quizStartedState);
+
   useEffect(() => {
     Rest.getRandomCapitals().then((capitals) => {
       setAllCapitals(capitals);
     });
   }, []);
+
   const returnRandomCountries = () => {
     Rest.getRandomCountries().then((countries) =>
       setRandomCountries(countries)
@@ -53,6 +60,7 @@ function App() {
     setQuestionCounter(0);
     setCorrectAnswerCounter(0);
   };
+
   const skipCountry = () => {
     const newCountryCounter = questionCounter + 1;
     setQuestionCounter(newCountryCounter);
@@ -63,6 +71,7 @@ function App() {
     setCorrectAnswerCounter(newCorrectAnswerCounter);
     console.log("number of correct answers:" + correctAnswerCounter);
   };
+
   const generateRandomCapitalIndex = () => {
     const newRandomIndexes: number[] = [];
     while (newRandomIndexes.length < 3) {
@@ -74,6 +83,14 @@ function App() {
     console.log(newRandomIndexes);
     setRandomCapitalIndexes(newRandomIndexes);
   };
+
+  const startOver = () => {
+    setQuestionCounter(0);
+    setCorrectAnswerCounter(0);
+    returnRandomCountries();
+    setQuizStarted(false);
+  };
+
   return (
     <div className="page-container background-image">
       <Container
@@ -85,8 +102,9 @@ function App() {
           skipCountry={skipCountry}
           generateRandomCapitalIndex={generateRandomCapitalIndex}
           addCorrectAnswer={addCorrectAnswer}
+          startOver={startOver}
         />
-        <GlobeChart />
+        {questionCounter < 15 ? <GlobeChart /> : <Results />}
         {/* <Results /> */}
       </Container>
     </div>

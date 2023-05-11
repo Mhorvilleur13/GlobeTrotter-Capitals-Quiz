@@ -13,7 +13,7 @@ am4core.useTheme(am4themes_animated);
 
 const GlobeChart = () => {
   const chartRef = useRef(null);
-  const [spinGlobe, setSpinGlobe] = useState(true);
+  const spinGlobe = useRef(true);
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
   const [questionCounter, setQuestionCounter] =
@@ -55,13 +55,13 @@ const GlobeChart = () => {
     hs.properties.fill = chart.colors.getIndex(0).brighten(-0.5);
 
     let animation;
-    if (spinGlobe) {
+    if (spinGlobe.current === true) {
       setTimeout(function () {
         animation = chart.animate(
           { property: "deltaLongitude", to: 100000 },
           20000000
         );
-      }, 2000);
+      }, 1000);
     }
 
     // chart.seriesContainer.events.on("click", function () {
@@ -69,7 +69,7 @@ const GlobeChart = () => {
     // });
     document.addEventListener("click", function () {
       animation.stop();
-      setSpinGlobe(false);
+      spinGlobe.current = false;
     });
 
     chart.goHome = function () {
