@@ -25,3 +25,8 @@ export const correctAnswerCounterAtom = atom<number>({
   key: "correct-answer-counter",
   default: 0,
 });
+
+export const quizStartedAtom = atom<boolean>({
+  key: "quiz-started",
+  default: false,
+});

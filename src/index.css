@@ -16,12 +16,13 @@ code {
   background-image: url("./Assets/images/darkSpace.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 130vh;
 }
 
 .card.search-card , .card.results-card {
-background-color: #b5b2e7
+background-color: #b5b2e7;
 }
+
 
 #chartdiv {
   width: 100%;
