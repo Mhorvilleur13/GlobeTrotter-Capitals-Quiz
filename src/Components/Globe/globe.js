@@ -7,6 +7,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import {
   randomCountriesAtom as randomCountriesState,
   questionCounterAtom as questionCounterState,
+  quizStartedAtom as quizStartedState,
 } from "../../state/atom";
 
 am4core.useTheme(am4themes_animated);
@@ -18,6 +19,7 @@ const GlobeChart = () => {
     useRecoilState(randomCountriesState);
   const [questionCounter, setQuestionCounter] =
     useRecoilState(questionCounterState);
+  const [quizStarted, setQuizStarted] = useRecoilState(quizStartedState);
 
   useEffect(() => {
     let chart = am4core.create(chartRef.current, am4maps.MapChart);
@@ -33,12 +35,12 @@ const GlobeChart = () => {
 
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
-    //polygonTemplate.fill = am4core.color("#FF6633");
+    polygonTemplate.fill = am4core.color("#FF6633");
     polygonTemplate.fill = am4core.color("#579c49");
 
     polygonTemplate.stroke = am4core.color("#000033");
     polygonTemplate.strokeWidth = 0.5;
-    polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
+    //polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
     polygonTemplate.url = "https://www.datadrum.com/main.php?package={id}";
     polygonTemplate.urlTarget = "_blank";
 
@@ -73,12 +75,46 @@ const GlobeChart = () => {
     });
 
     chart.goHome = function () {
+      const countryName = randomCountries[questionCounter].country;
+      console.log(countryName);
+      const desiredColor = am4core.color("#6A5ACD");
+      if (quizStarted) {
+        // Iterate through all the polygons on the map
+        polygonSeries.mapPolygons.each((polygon) => {
+          // Check if the name of the polygon matches the name of the country
+          if (polygon.dataItem.dataContext.name == countryName) {
+            // Set the fill color of the polygon to the desired color
+            console.log(polygon);
+            polygon.fill = desiredColor;
+            // polygon.isHover = true;
+
+            // chart.cursorTooltipEnabled = false; // disable cursor tooltip
+            // chart.tooltipContainer.hide(); // hide the cursor tooltip if it is already visible
+            // if (!chart.tooltipLabel) {
+            //   // create tooltip label if it does not exist
+            //   chart.tooltipLabel = chart.chartContainer.createChild(
+            //     am4core.Label
+            //   );
+            //   chart.tooltipLabel.fontSize = 12;
+            //   chart.tooltipLabel.padding(5, 10, 5, 10);
+            //   chart.tooltipLabel.background.fill = am4core.color("#000000");
+            //   chart.tooltipLabel.background.fillOpacity = 0.7;
+            //   chart.tooltipLabel.fill = am4core.color("#ffffff");
+            //   chart.tooltipLabel.align = "center";
+            //   chart.tooltipLabel.valign = "middle";
+            // }
+            // chart.tooltipLabel.text = polygon.dataItem.dataContext.name;
+            // chart.tooltipLabel.visible = true;
+            // chart.tooltipLabel.x = polygon.visualLongitude;
+            // chart.tooltipLabel.y = polygon.visualLatitude - 20; // position label above the country
+          }
+        });
+      }
       console.log(randomCountries[0].latlng[0]);
       console.log(randomCountries[0].latlng[1]);
       chart.deltaLatitude = -1 * randomCountries[questionCounter].latlng[0];
       chart.deltaLongitude = -1 * randomCountries[questionCounter].latlng[1];
       chart.zoomLevel = 1;
-      //chart.color = "#333";
       console.log(chart);
     };
 
