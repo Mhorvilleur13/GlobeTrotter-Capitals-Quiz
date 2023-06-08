@@ -24,12 +24,17 @@ background-color: #b5b2e7;
 }
 
 
+.container {
+  width: 100%;
+  padding: 20 20;
+}
+
 #chartdiv {
   width: 100%;
   height: 500px;
 max-width:100%;
-  background-color:#000033;
 }
+
 body .choice-button {
   background-color: #0d469b;
 }
