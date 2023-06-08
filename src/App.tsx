@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Search from "./Components/Search/search";
 import Results from "./Components/Results/results";
 import GlobeChart from "./Components/Globe/globe";
+import Globecopy from "./Components/globeCopy/globecopy";
 import { Container } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import Rest from "./util/Rest";
@@ -92,7 +93,7 @@ function App() {
   };
 
   return (
-    <div className="page-container background-image">
+    <div className="background-image">
       <Container
         className="d-flex align-items-center justify-content-center flex-column"
         style={{ minHeight: "100vh" }}
@@ -104,10 +105,14 @@ function App() {
           addCorrectAnswer={addCorrectAnswer}
           startOver={startOver}
         />
-        {questionCounter < 15 ? <GlobeChart /> : <Results />}
-        {/* <Results /> */}
+
+        {questionCounter < 15 ? <Globecopy /> : <Results />}
       </Container>
     </div>
+    // <div className="background-image">
+    //   {/* <GlobeChart /> */}
+    //   <Globecopy />
+    // </div>
   );
 }
 
