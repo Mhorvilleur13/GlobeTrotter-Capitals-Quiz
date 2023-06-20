@@ -7,6 +7,7 @@ import {
   GenerateRandomCapitalIndexProp,
   AddCorrectAnswerProp,
   startOverProp,
+  correctAnswerProp,
 } from "../../App";
 import {
   randomCountriesAtom as randomCountriesState,
@@ -23,7 +24,8 @@ const Search = (
     SkipCountryProp &
     GenerateRandomCapitalIndexProp &
     AddCorrectAnswerProp &
-    startOverProp
+    startOverProp &
+    correctAnswerProp
 ) => {
   const {
     returnRandomCountries,
@@ -31,6 +33,7 @@ const Search = (
     generateRandomCapitalIndex,
     addCorrectAnswer,
     startOver,
+    correctAnswer,
   } = props;
 
   const [quizStarted, setQuizStarted] = useRecoilState(quizStartedState);
@@ -77,6 +80,7 @@ const Search = (
       className="button-choice mx-2"
       onClick={() => {
         addCorrectAnswer();
+        correctAnswer();
         skipCountry();
         generateRandomCapitalIndex();
       }}
