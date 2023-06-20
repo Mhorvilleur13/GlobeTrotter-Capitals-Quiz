@@ -5,6 +5,7 @@ export interface Country {
   capital: Capital[];
   latlng: LatLng[];
   flag: string;
+  wasClicked: boolean;
 }
 
 export type Capital = string;

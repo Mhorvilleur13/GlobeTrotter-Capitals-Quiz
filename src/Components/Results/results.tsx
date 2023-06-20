@@ -2,6 +2,8 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { Card } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import { randomCountriesAtom as randomCountriesState } from "../../state/atom";
+import check from "../../Assets/images/checked (2).png";
+import cancel from "../../Assets/images/cancel.png";
 
 const Results = () => {
   const [randomCountries, setRandomCountries] =
@@ -23,14 +25,30 @@ const Results = () => {
       <tbody>
         {randomCountries.length >= 1 &&
           randomCountries.map((country) => {
-            //const capitalCity = country[Object.keys(country)[0]][0];
             return (
               <tr>
                 <td>
                   {country.country}
                   {country.flag}
                 </td>
-                <td>{country.capital}</td>
+                <td>
+                  {country.capital}
+                  {country.wasClicked ? (
+                    <img
+                      height="20px"
+                      width="20px"
+                      src={check}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  ) : (
+                    <img
+                      height="25px"
+                      width="25px"
+                      src={cancel}
+                      style={{ marginLeft: "10px" }}
+                    />
+                  )}
+                </td>
               </tr>
             );
           })}

@@ -54,6 +54,7 @@ const Rest = {
           capital: capital,
           latlng: country.latlng,
           flag: country.flag,
+          wasClicked: false,
         };
       });
       console.log(randomCountries);

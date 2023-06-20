@@ -33,6 +33,9 @@ export interface AddCorrectAnswerProp {
 export interface startOverProp {
   startOver: () => void;
 }
+export interface correctAnswerProp {
+  correctAnswer: () => void;
+}
 function App() {
   const [randomCountries, setRandomCountries] =
     useRecoilState(randomCountriesState);
@@ -62,15 +65,23 @@ function App() {
     setCorrectAnswerCounter(0);
   };
 
-  const skipCountry = () => {
-    const newCountryCounter = questionCounter + 1;
-    setQuestionCounter(newCountryCounter);
-  };
-
   const addCorrectAnswer = () => {
     const newCorrectAnswerCounter = correctAnswerCounter + 1;
     setCorrectAnswerCounter(newCorrectAnswerCounter);
     console.log("number of correct answers:" + correctAnswerCounter);
+  };
+
+  const correctAnswer = () => {
+    const updatedRandomCountries = [...randomCountries];
+    const updatedCountry = { ...updatedRandomCountries[questionCounter] };
+    updatedCountry.wasClicked = true;
+    updatedRandomCountries[questionCounter] = updatedCountry;
+    setRandomCountries(updatedRandomCountries);
+  };
+
+  const skipCountry = () => {
+    const newCountryCounter = questionCounter + 1;
+    setQuestionCounter(newCountryCounter);
   };
 
   const generateRandomCapitalIndex = () => {
@@ -104,15 +115,12 @@ function App() {
           generateRandomCapitalIndex={generateRandomCapitalIndex}
           addCorrectAnswer={addCorrectAnswer}
           startOver={startOver}
+          correctAnswer={correctAnswer}
         />
 
         {questionCounter < 15 ? <Globecopy /> : <Results />}
       </Container>
     </div>
-    // <div className="background-image">
-    //   {/* <GlobeChart /> */}
-    //   <Globecopy />
-    // </div>
   );
 }
 
