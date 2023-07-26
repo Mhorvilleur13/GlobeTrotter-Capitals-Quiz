@@ -2,8 +2,8 @@ import "./index.css";
 import { useEffect, useState } from "react";
 import Search from "./Components/Search/search";
 import Results from "./Components/Results/results";
-import GlobeChart from "./Components/Globe/globe";
-import Globecopy from "./Components/globeCopy/globecopy";
+
+import Globe from "./Components/Globe/globe";
 import { Container } from "react-bootstrap";
 import { useRecoilState } from "recoil";
 import Rest from "./util/Rest";
@@ -118,7 +118,7 @@ function App() {
           correctAnswer={correctAnswer}
         />
 
-        {questionCounter < 15 ? <Globecopy /> : <Results />}
+        {questionCounter < 15 ? <Globe /> : <Results />}
       </Container>
     </div>
   );

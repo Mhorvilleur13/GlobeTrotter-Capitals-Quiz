@@ -136,7 +136,7 @@ const Search = (
         )}
         {questionCounter >= 15 && (
           <Card.Body>
-            <Card.Title>Results:</Card.Title>
+            <Card.Title className="text-center">Results</Card.Title>
             <Card.Text className="text-center score">
               {correctAnswerCounter} / 15
             </Card.Text>
