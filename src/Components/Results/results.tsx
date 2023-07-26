@@ -14,7 +14,7 @@ const Results = () => {
       bordered
       hover
       variant="dark"
-      className=" mt-2 w-50 results-table"
+      className=" mt-2 w-75 results-table"
     >
       <thead>
         <tr>
