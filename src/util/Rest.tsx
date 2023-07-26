@@ -51,7 +51,7 @@ const Rest = {
         const capital = country.capital ? country.capital : "No Capital";
         return {
           country: country.name.common,
-          capital: capital,
+          capital: capital[0],
           latlng: country.latlng,
           flag: country.flag,
           area: country.area,
