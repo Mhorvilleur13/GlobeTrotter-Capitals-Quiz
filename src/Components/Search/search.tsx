@@ -107,13 +107,14 @@ const Search = (
 
   return (
     <div>
-      <Card className="search-card mt-3">
+      <Card className="search-card mt-3 text-center">
         {!quizStarted && (
           <Card.Body>
-            <h2 className="text-center">Start Quiz!</h2>
+            <h3> Capitals Quiz </h3>
+            <hr />
             <Form onSubmit={handleSubmit}>
               <Button className="w-100 mt-2" type="submit">
-                GO
+                Start
               </Button>
             </Form>
           </Card.Body>

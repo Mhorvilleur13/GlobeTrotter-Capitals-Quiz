@@ -1,14 +1,14 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -16,13 +16,13 @@ code {
   background-image: url("./Assets/images/darkSpace.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 130vh;
+  height: 100%;
 }
 
-.card.search-card , .card.results-card {
-background-color: #b5b2e7;
+.card.search-card,
+.card.results-card {
+  background-color: #b5b2e7;
 }
-
 
 .container {
   width: 100%;
@@ -32,7 +32,7 @@ background-color: #b5b2e7;
 #chartdiv {
   width: 100%;
   height: 500px;
-max-width:100%;
+  max-width: 100%;
 }
 
 body .choice-button {

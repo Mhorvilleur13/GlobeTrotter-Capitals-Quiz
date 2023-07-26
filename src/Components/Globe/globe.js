@@ -30,6 +30,9 @@ const Globe = () => {
     chart.deltaLatitude = -20;
     chart.padding(20, 20, 20, 20);
 
+    chart.minZoomLevel = 1;
+    chart.maxZoomLevel = 1;
+
     let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
     polygonSeries.useGeodata = true;
 
@@ -41,7 +44,7 @@ const Globe = () => {
     polygonTemplate.stroke = am4core.color("#000033");
     polygonTemplate.strokeWidth = 0.5;
     //polygonTemplate.cursorOverStyle = am4core.MouseCursorStyle.pointer;
-    polygonTemplate.url = "https://www.datadrum.com/main.php?package={id}";
+    //polygonTemplate.url = "https://www.datadrum.com/main.php?package={id}";
     polygonTemplate.urlTarget = "_blank";
 
     let graticuleSeries = chart.series.push(new am4maps.GraticuleSeries());
