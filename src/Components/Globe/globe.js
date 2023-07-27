@@ -30,6 +30,9 @@ const Globe = () => {
     chart.deltaLatitude = -20;
     chart.padding(20, 20, 20, 20);
 
+    // Disable touch interactions
+    chart.touchZoom = chart.touchRotate = chart.touchOptions = false;
+
     chart.minZoomLevel = 1;
     chart.maxZoomLevel = 1;
 
@@ -38,7 +41,6 @@ const Globe = () => {
 
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
-    //polygonTemplate.fill = am4core.color("#FF6633");
     polygonTemplate.fill = am4core.color("#579c49");
 
     polygonTemplate.stroke = am4core.color("#000033");

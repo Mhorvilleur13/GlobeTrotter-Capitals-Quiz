@@ -59,7 +59,7 @@ const Search = (
 
   const buttonElements = [
     <Button
-      className="button-choice mx-2"
+      className="button-choice mx-2 btn btn-primary btn-sm"
       onClick={() => {
         skipCountry();
         generateRandomCapitalIndex();
@@ -68,7 +68,7 @@ const Search = (
       {allCapitals[randomCapitalIndexes[0]]}
     </Button>,
     <Button
-      className="button-choice mx-2"
+      className="button-choice mx-2 btn btn-primary btn-sm"
       onClick={() => {
         skipCountry();
         generateRandomCapitalIndex();
@@ -77,7 +77,7 @@ const Search = (
       {allCapitals[randomCapitalIndexes[1]]}
     </Button>,
     <Button
-      className="button-choice mx-2"
+      className="button-choice mx-2 btn btn-primary btn-sm"
       onClick={() => {
         addCorrectAnswer();
         correctAnswer();
@@ -88,7 +88,7 @@ const Search = (
       {randomCountries[questionCounter]?.capital}
     </Button>,
     <Button
-      className="button-choice mx-2"
+      className="button-choice mx-2 btn btn-primary btn-sm"
       onClick={() => {
         skipCountry();
         generateRandomCapitalIndex();
@@ -129,7 +129,7 @@ const Search = (
               {randomCountries[questionCounter]?.country}
               {randomCountries[questionCounter]?.flag}
             </Card.Text>
-            <div className="d-flex">{shuffledButtons}</div>
+            <div className="buttons-div">{shuffledButtons}</div>
             <Card.Text className="text-center score mt-1">
               Score:{correctAnswerCounter} / {randomCountries.length}
             </Card.Text>

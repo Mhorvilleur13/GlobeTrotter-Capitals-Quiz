@@ -39,11 +39,27 @@ body .choice-button {
   background-color: #0d469b;
 }
 .country {
-  font-size: 25px;
+  font-size: 20px;
 }
 .score {
   font-size: 20px;
 }
 .question-count {
   font-size: 19px;
+}
+
+.buttons-div {
+  display: flex;
+}
+
+@media (max-width: 500px) {
+  .search-card {
+    max-width: 100%; /* Set the desired smaller width for phone screens */
+  }
+  .buttons-div {
+    flex-direction: column;
+  }
+  .button-choice {
+    margin: 5px;
+  }
 }
