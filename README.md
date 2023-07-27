@@ -20,7 +20,7 @@ The project fetches data from the Rest Countries API that provides information a
 - **TypeScript**
 - **Boostrap**
 - **CSS**
-- [Rest Countries API] (https://restcountries.com/)
+- [Rest Countries API](https://restcountries.com/)
 
 ![Website Screenshot](src/Assets/images/GlobeScreenShot.png)
 
