@@ -31,22 +31,13 @@ const Rest = {
           randomIndexes.push(randomIndex);
         }
       }
-      // this returns array of 10 countries with all data
-      // const randomCountriesFull = randomIndexes.map((index) => {
-      //   if (
-      //     countries[index].capital !== undefined &&
-      //     countries[index].capital.length === 1
-      //   ) {
-      //     return countries[index];
-      //   }
-      // });
 
       const randomCountriesFull = randomIndexes.map(
         (index) => countries[index]
       );
 
       console.log(randomCountriesFull);
-      // returns 10 countries with capital, lat, long, and flag.
+
       const randomCountries = randomCountriesFull.map((country) => {
         const capital = country.capital ? country.capital : "No Capital";
         return {

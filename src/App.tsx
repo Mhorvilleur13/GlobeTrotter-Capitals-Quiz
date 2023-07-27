@@ -106,7 +106,7 @@ function App() {
   return (
     <div className="background-image">
       <Container
-        className="d-flex align-items-center justify-content-center flex-column"
+        className="d-flex align-items-center justify-content-center flex-column text-center"
         style={{ minHeight: "100vh" }}
       >
         <Search
