@@ -20,7 +20,7 @@ The project fetches data from the Rest Countries API that provides information a
 - **TypeScript**
 - **Boostrap**
 - **CSS**
-- **[Rest Countries API] (https://restcountries.com/)**
+- [Rest Countries API] (https://restcountries.com/)
 
 ![Website Screenshot](src/Assets/images/GlobeScreenShot.png)
 
@@ -28,6 +28,6 @@ The project fetches data from the Rest Countries API that provides information a
 
 You can try out the Capitals of Countries and Territories Quiz online by visiting the following link:
 
-[Live Demo](capital-exam.surge.sh)
+[capital-exam.surge.sh](https://capital-exam.surge.sh)
 
 Please note that a stable internet connection is required to access the external API used in this project.
