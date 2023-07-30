@@ -110,7 +110,7 @@ const Search = (
       <Card className="search-card mt-3 text-center">
         {!quizStarted && (
           <Card.Body>
-            <h3> Capitals Quiz </h3>
+            <h3>Capitals Quiz</h3>
             <hr />
             <Form onSubmit={handleSubmit}>
               <Button className="w-100 mt-2" type="submit">

@@ -1,4 +1,4 @@
-# Capitals of Countries and Territories Quiz
+# GlobeTrotter Capitals Quiz
 
 ## Overview
 
