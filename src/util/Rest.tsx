@@ -12,7 +12,6 @@ const Rest = {
           allCapitals.push(country.capital);
         }
       });
-      console.log(allCapitals);
       return allCapitals;
     } catch (error) {
       console.log(error);
@@ -36,8 +35,6 @@ const Rest = {
         (index) => countries[index]
       );
 
-      console.log(randomCountriesFull);
-
       const randomCountries = randomCountriesFull.map((country) => {
         const capital = country.capital ? country.capital : "No Capital";
         return {
@@ -49,7 +46,7 @@ const Rest = {
           wasClicked: false,
         };
       });
-      console.log(randomCountries);
+
       return randomCountries;
     } catch (error) {
       console.error(error);
