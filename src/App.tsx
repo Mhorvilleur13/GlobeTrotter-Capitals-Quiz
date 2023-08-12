@@ -1,6 +1,6 @@
 import "./index.css";
 import { useEffect, useState } from "react";
-import Search from "./Components/Search/search";
+import Quiz from "./Components/Quiz/quiz";
 import Results from "./Components/Results/results";
 
 import Globe from "./Components/Globe/globe";
@@ -30,10 +30,10 @@ export interface GenerateRandomCapitalIndexProp {
 export interface AddCorrectAnswerProp {
   addCorrectAnswer: () => void;
 }
-export interface startOverProp {
+export interface StartOverProp {
   startOver: () => void;
 }
-export interface correctAnswerProp {
+export interface CorrectAnswerProp {
   correctAnswer: () => void;
 }
 function App() {
@@ -68,7 +68,6 @@ function App() {
   const addCorrectAnswer = () => {
     const newCorrectAnswerCounter = correctAnswerCounter + 1;
     setCorrectAnswerCounter(newCorrectAnswerCounter);
-    console.log("number of correct answers:" + correctAnswerCounter);
   };
 
   const correctAnswer = () => {
@@ -92,7 +91,6 @@ function App() {
         newRandomIndexes.push(randomNumber);
       }
     }
-    console.log(newRandomIndexes);
     setRandomCapitalIndexes(newRandomIndexes);
   };
 
@@ -109,7 +107,7 @@ function App() {
         className="d-flex align-items-center justify-content-center flex-column text-center"
         style={{ minHeight: "100vh" }}
       >
-        <Search
+        <Quiz
           returnRandomCountries={returnRandomCountries}
           skipCountry={skipCountry}
           generateRandomCapitalIndex={generateRandomCapitalIndex}

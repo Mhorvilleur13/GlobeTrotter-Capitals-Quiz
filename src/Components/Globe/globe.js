@@ -111,13 +111,8 @@ const Globe = () => {
             }
           });
         });
-        console.log("country name" + countryName);
-        console.log(randomCountries[0].latlng[0]);
-        console.log(randomCountries[0].latlng[1]);
         chart.deltaLatitude = -1 * randomCountries[questionCounter].latlng[0];
         chart.deltaLongitude = -1 * randomCountries[questionCounter].latlng[1];
-        //chart.zoomLevel = 1;
-        console.log(chart);
       }
     }
     updateCountry();
