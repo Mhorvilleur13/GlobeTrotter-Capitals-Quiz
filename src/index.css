@@ -21,7 +21,48 @@ code {
 
 .card.search-card,
 .card.results-card {
-  background-color: #b5b2e7;
+  background-color: #1e1e1eeb;
+  border-radius: 30px;
+  color: white;
+  opacity: 0.9;
+  border-bottom: 5px solid #48783e;
+}
+
+@keyframes wrong-shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.wrong-shake {
+  animation: wrong-shake 0.5s;
+  border-bottom: 5px solid red !important;
+}
+
+#button-choice {
+  background: #393b3c;
+  border-width: 0;
+  color: white;
+  margin: 5px;
+}
+
+#button-choice:hover {
+  color: lightgrey;
 }
 
 .container {
@@ -31,15 +72,13 @@ code {
 
 #chartdiv {
   width: 100%;
-  height: 500px;
+  height: 450px;
   max-width: 100%;
 }
 
-body .choice-button {
-  background-color: #0d469b;
-}
-.country {
+.country-container {
   font-size: 20px;
+  color: white;
 }
 .score {
   font-size: 20px;

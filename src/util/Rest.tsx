@@ -36,10 +36,10 @@ const Rest = {
       );
 
       const randomCountries = randomCountriesFull.map((country) => {
-        const capital = country.capital ? country.capital : "No Capital";
+        const capital = country.capital ? country.capital[0] : "No capital";
         return {
           country: country.name.common,
-          capital: capital[0],
+          capital: capital,
           latlng: country.latlng,
           flag: country.flag,
           area: country.area,

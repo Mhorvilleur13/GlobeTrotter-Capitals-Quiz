@@ -49,6 +49,7 @@ const Quiz = (
   const [correctAnswerCounter, setCorrectAnswerCounter] = useRecoilState(
     correctAnswerCounterState
   );
+  const [isWrongCardShaking, setIsWrongCardShaking] = useState(false);
 
   const handleSubmit = (_e: React.FormEvent<HTMLFormElement>) => {
     _e.preventDefault();
@@ -59,25 +60,38 @@ const Quiz = (
 
   const buttonElements = [
     <Button
-      className="button-choice mx-2 btn btn-primary btn-sm"
+      id="button-choice"
+      className="mx-2 btn btn-sm"
       onClick={() => {
-        skipCountry();
-        generateRandomCapitalIndex();
+        setIsWrongCardShaking(true);
+
+        setTimeout(() => {
+          skipCountry();
+          generateRandomCapitalIndex();
+          setIsWrongCardShaking(false);
+        }, 300);
       }}
     >
       {allCapitals[randomCapitalIndexes[0]]}
     </Button>,
     <Button
-      className="button-choice mx-2 btn btn-primary btn-sm"
+      id="button-choice"
+      className=" mx-2 btn btn-sm"
       onClick={() => {
-        skipCountry();
-        generateRandomCapitalIndex();
+        setIsWrongCardShaking(true);
+
+        setTimeout(() => {
+          skipCountry();
+          generateRandomCapitalIndex();
+          setIsWrongCardShaking(false);
+        }, 300);
       }}
     >
       {allCapitals[randomCapitalIndexes[1]]}
     </Button>,
     <Button
-      className="button-choice mx-2 btn btn-primary btn-sm"
+      id="button-choice"
+      className="mx-2 btn btn-sm"
       onClick={() => {
         addCorrectAnswer();
         correctAnswer();
@@ -88,10 +102,16 @@ const Quiz = (
       {randomCountries[questionCounter]?.capital}
     </Button>,
     <Button
-      className="button-choice mx-2 btn btn-primary btn-sm"
+      id="button-choice"
+      className="mx-2 btn btn-sm"
       onClick={() => {
-        skipCountry();
-        generateRandomCapitalIndex();
+        setIsWrongCardShaking(true);
+
+        setTimeout(() => {
+          skipCountry();
+          generateRandomCapitalIndex();
+          setIsWrongCardShaking(false);
+        }, 300);
       }}
     >
       {allCapitals[randomCapitalIndexes[2]]}
@@ -112,14 +132,17 @@ const Quiz = (
 
   return (
     <div>
-      <Card className="search-card mt-3 text-center">
+      <Card
+        className={`search-card mt-3 text-center ${
+          isWrongCardShaking ? "wrong-shake" : ""
+        }`}
+      >
         {!quizStarted && (
           <Card.Body>
-            <h3>GlobeTrotter</h3>
             <h4>Capitals Quiz</h4>
             <hr />
             <Form onSubmit={handleSubmit}>
-              <Button className="w-100 mt-2" type="submit">
+              <Button className="w-75" id="button-choice" type="submit">
                 Start
               </Button>
             </Form>
@@ -130,7 +153,7 @@ const Quiz = (
             <Card.Text className="text-center question-count">
               {questionCounter + 1} out of 15
             </Card.Text>
-            <Card.Text className="mt-2 text-center country">
+            <Card.Text className="mt-2 text-center country-container">
               {randomCountries[questionCounter]?.flag}
               {randomCountries[questionCounter]?.country}
               {randomCountries[questionCounter]?.flag}
@@ -147,7 +170,9 @@ const Quiz = (
             <Card.Text className="text-center score">
               {correctAnswerCounter} / 15
             </Card.Text>
-            <Button onClick={startOver}>Play Again!</Button>
+            <Button id="button-choice" onClick={startOver}>
+              Play Again!
+            </Button>
           </Card.Body>
         )}
       </Card>
