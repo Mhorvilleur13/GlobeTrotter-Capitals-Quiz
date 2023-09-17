@@ -22,7 +22,7 @@ The project fetches data from the Rest Countries API that provides information a
 - **CSS**
 - [Rest Countries API](https://restcountries.com/)
 
-![Website Screenshot](src/Assets/images/GlobeScreenShot.png)
+![Website Screenshot](src/Assets/images/GlobeKenyaScreenShot.png)
 
 ## Live Demo
 
